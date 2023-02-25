@@ -2,30 +2,27 @@ import { useState, useRef } from "react";
 
 const DragDropFiles = () => {
   const [files, setFiles] = useState(null);
-  const inputRef = useRef();
+  const inputRef = useRef();//user hook
 
+  //function to 
   const handleDragOver = (event) => {
     event.preventDefault();
   };
 
+  //
   const handleDrop = (event) => {
     event.preventDefault();
     setFiles(event.dataTransfer.files)
   };
   
-  // send files to the server // learn from my other video
+  // send files to the server --backend part
   const handleUpload = () => {
     const formData = new FormData();
     formData.append("Files", files);
     console.log(formData.getAll())
-    // fetch(
-    //   "link", {
-    //     method: "POST",
-    //     body: formData
-    //   }  
-    // )
   };
 
+  //show the name of selected files
   if (files) return (
     <div className="uploads">
         <ul>
@@ -33,11 +30,12 @@ const DragDropFiles = () => {
         </ul>
         <div className="actions">
             <button onClick={() => setFiles(null)}>Cancel</button>
-            <button onClick={handleUpload}>Upload</button>
+            <button onClick={handleUpload}>Submit</button>
         </div>
     </div>
   )
 
+  //<input /> multiple on change... allow upload multiple files at once
   return (
     <>
         <div 
@@ -52,7 +50,6 @@ const DragDropFiles = () => {
             multiple
             onChange={(event) => setFiles(event.target.files)}
             hidden
-            accept="image/png, image/jpeg"
             ref={inputRef}
           />
           <button onClick={() => inputRef.current.click()}>Select Files</button>
