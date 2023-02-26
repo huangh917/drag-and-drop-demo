@@ -107,7 +107,7 @@ const handleUpload = () => {
             {Array.from(files).map((file, idx) => <li key={idx}>{file.name}</li> )}
         </ul>
         <div className="actions">
-            <button onClick={() => setFiles(null)}>Cancel</button>
+            <button onClick={() => setFiles(null) & setonPress(true)}>Cancel</button>
             {onPress &&<button onClick={handleUpload}>Upload</button>}
             {!onPress &&  <Bar now={countOfProgess} />}
         </div>
