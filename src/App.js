@@ -1,5 +1,5 @@
 import "./App.css";
-import SortableList from "./components/SortableList";
+// import SortableList from "./components/SortableList";
 import DragDropFiles from "./components/DragDropFiles";
 
 const App = () => {
