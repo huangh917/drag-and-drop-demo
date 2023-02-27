@@ -1,10 +1,11 @@
 import { useState, useRef,useEffect } from "react";
 
 import React from 'react';
-import UploadService from "../services/FileUploadService";
+// import UploadService from "../services/FileUploadService";
 import Bar from '../components/bar';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const DragDropFiles = () => {
   const [files, setFiles] = useState(null);
@@ -17,11 +18,11 @@ const DragDropFiles = () => {
   const [fileInfos, setFileInfos] = useState([]);
   
   //equals to componentDidmount in class
-  useEffect(()=>{
-    UploadService.getFiles().then((response)=>{
-      setFileInfos(response.data);
-    })
-  },[]);
+  // useEffect(()=>{
+  //   UploadService.getFiles().then((response)=>{
+  //     setFileInfos(response.data);
+  //   })
+  // },[]);
 
 
 
@@ -61,18 +62,18 @@ const handleUpload = () => {
 //progress bar
   const [countOfProgess, setCountOfProgess] = React.useState(0);
  
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setCountOfProgess((oldProgress) => {
-        if (100 == oldProgress) return 0;
-        return Math.min(oldProgress + Math.random() * 10, 100);
-      });
-    }, );
+  // React.useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setCountOfProgess((oldProgress) => {
+  //       if (oldProgress == 100) return 0;
+  //       return Math.min(oldProgress + Math.random() * 10, 100);
+  //     });
+  //   }, );
  
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
 
   // const upload = () => {
   //   let currentFile = selectedFiles[0];
@@ -100,8 +101,29 @@ const handleUpload = () => {
   // };
 
 
-  if (files ) return (
+  if (files) return (
     
+    <>
+      <div 
+            className="dropzone2"
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+        >
+          
+          <input 
+            type="file"
+            multiple
+            onChange={(event) => setFiles(event.target.files)}
+            hidden
+            accept="image/png, image/jpeg"
+            ref={inputRef}
+          />
+          <button onClick={() => inputRef.current.click()}>Select Files</button>
+          {/* <button onClick={() => inputRef.current.click()}>Select Files</button> */}
+
+
+
+      </div>
     <div className="uploads">
         <ul>
             {Array.from(files).map((file, idx) => <li key={idx}>{file.name}</li> )}
@@ -112,7 +134,9 @@ const handleUpload = () => {
             {!onPress &&  <Bar now={countOfProgess} />}
         </div>
     </div>
+    </>
   )
+
 //   if (files && onPress ) return (
 //     <div style={{ display: 'block',
 //     width: 700, padding: 30 }}>   
@@ -120,9 +144,11 @@ const handleUpload = () => {
 //       </div> 
 // )
 
+
+//inputRef.current.click is for get the input stuff
   return (
     <>
-        <div 
+       <div 
             className="dropzone"
             onDragOver={handleDragOver}
             onDrop={handleDrop}
@@ -139,7 +165,12 @@ const handleUpload = () => {
             ref={inputRef}
           />
           <button onClick={() => inputRef.current.click()}>Select Files</button>
+          {/* <button onClick={() => inputRef.current.click()}>Select Files</button> */}
+
+
+
         </div>
+
     </>
   );
 };
