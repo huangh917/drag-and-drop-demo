@@ -3,9 +3,9 @@ import { useState, useRef,useEffect } from "react";
 import React from 'react';
 // import UploadService from "../services/FileUploadService";
 import Bar from '../components/bar';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+// import ProgressBar from 'react-bootstrap/ProgressBar';
+// import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
 
 const DragDropFiles = () => {
   const [files, setFiles] = useState(null);
